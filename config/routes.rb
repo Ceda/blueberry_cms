@@ -4,7 +4,11 @@ BlueberryCMS::Engine.routes.draw do
     resources :menus, except: :show
   end
 
-  scope '/:locale', locale: Regexp.new(I18n.available_locales.join('|')) do
+  if BlueberryCMS::multi_lang?
+    scope '/:locale', locale: Regexp.new(I18n.available_locales.join('|')) do
+      get '/(*path)', to: 'pages#show', as: :page
+    end
+  else
     get '/(*path)', to: 'pages#show', as: :page
   end
 

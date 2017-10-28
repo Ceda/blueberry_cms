@@ -37,7 +37,11 @@ module BlueberryCMS
     scope :in_footer, -> { where(show_in_footer: true) }
 
     def to_path
-      "/#{I18n.locale}#{path}"
+      if BlueberryCMS::multi_lang?
+        "/#{I18n.locale}#{path}"
+      else
+        path
+      end
     end
 
     private

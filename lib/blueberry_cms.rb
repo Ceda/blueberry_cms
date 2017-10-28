@@ -7,8 +7,11 @@ module BlueberryCMS
   @@parent_controller = 'ApplicationController'
   @@custom_blocks     = []
 
+  def self.multi_lang?
+    I18n.available_locales.count > 1
+  end
+
   def self.config
     yield self
   end
 end
-
